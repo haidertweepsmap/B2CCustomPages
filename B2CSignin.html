@@ -1283,35 +1283,71 @@
     </style>
     <style>
       .companyLogo{
-        float: left;
-        margin-top: 24px;
-      }
-
-      .login-footer{
-        height: 100px; 
-        background-color: #3b3e43;
+        display: inline-block;
+        vertical-align: top;
+        margin: 16px 0 0 0px !important;
       }
 
       .login-header{
+        height: 70px !important;
         font-size: 15px;
         text-decoration: none;
       }
 
-      .login-header-button{
-        color: white;
-        margin-top: 30px;
-        margin-right: 14px;
+
+      .login-header-button-group{
+        margin-top: 16px;
       }
 
+      .login-header-button{
+        color: white;
+        margin: 0px 15px;
+        letter-spacing: 2px;
+      }
       .login-header-button:hover{
         color: white;
         text-decoration: none;
         border-bottom: 1px solid skyblue;
       }
-
-      .login-header-button-group{
-        margin-top: 30px;
+      
+      .login-footer{
+        height: 70px; 
+        position: fixed;
+        bottom: 0;
+        background-color: #000;
       }
+
+      .login-footer-button{
+        color: white;
+        margin: 0px 15px;
+        letter-spacing: 2px;
+        color: #BBB;
+      }
+
+      .login-footer-button:hover{
+        color: white;
+        text-decoration: none;
+      }
+
+      .login-footer-button-group{
+        margin-top: 10px;
+      }
+      
+      .login-footer-button-group-right{
+        float: right;
+        margin-top: 10px;
+      }
+
+    .youtube-button{
+      background-color: #cc181e;
+      color: #fff;
+      padding: 1px 8px 1px 5.5px;
+      text-transform: initial;
+      vertical-align: top;
+      border-radius: 2px;
+      cursor: pointer;
+      width: 70px;
+    }
     </style>
   </head>
   <body>
@@ -1321,13 +1357,11 @@
           <img class="companyLogo" data-tenant-branding-logo="true" src="https://tweepsmap.com/c/images/static/logo.png" alt="Company Logo">
         </div>
 
-        <div class="col-9">
-          <div class="row login-header-button-group">
+        <div class="col-9 login-header-button-group">
             <a href="#" class="float-left"><span class="login-header-button">PLANS</span></a>
             <a href="#" class="float-left"><span class="login-header-button">SOLUTIONS</span></a>
             <a href="#" class="float-left"><span class="login-header-button">CONTACT</span></a>
           </div>
-        </div>
       </div>
     </div>
   
@@ -1341,8 +1375,26 @@
       </div>
     </div>
 
-
     <div class="container-fluid login-footer">
+      <div class="row">
+        <div class="col-md-3 login-footer-button-group">
+            <a href="#" class="float-left"><span class="login-footer-button">ABOUT</span></a>
+            <a href="#" class="float-left"><span class="login-footer-button">FAQ</span></a>
+            <a href="#" class="float-left"><span class="login-footer-button">BLOG</span></a>
+            <a href="#" class="float-left"><span class="login-footer-button">CONTACT</span></a>
+            <a href="#" class="float-left"><span class="login-footer-button">LANGUAGES</span></a>
+        </div>
+
+        <div class="col-md-3 offset-md-6 login-footer-button-group-right">
+          <div class="youtube-button">Youtube</div>
+      </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+            <a href="#" class="float-left"><span class="login-footer-button">TERMS & PRIVACY</span></a>
+        </div>
+      </div>
     </div>
 
   </body>

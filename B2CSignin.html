@@ -1397,5 +1397,159 @@
       </div>
     </div>
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>"use strict";$(document).ready(function () { if (navigator.userAgent.match(/IEMobile\/10\.0/)) { var t = document.createElement("style"); t.appendChild(document.createTextNode("@-ms-viewport{width:auto!important}")), t.appendChild(document.createTextNode("@-ms-viewport{height:auto!important}")), document.getElementsByTagName("head")[0].appendChild(t) } if (navigator.userAgent.match(/MSIE 10/i)) { var e = $("#footer_links_container"); $(e).css("padding-top", "100px") } var o, i = $("#background_background_image"), n = function () { document.body.style.overflow = "hidden", ($(window).width() - 500) / $(window).height() < o ? (i.height($(window).height()), i.width("auto")) : (i.width($(window).width() - 500), i.height("auto")), document.body.style.overflow = "" }; $("<img>").attr("src", i.attr("src")).load(function () { o = this.width / this.height, n() }), $(window).resize(function () { n() }), "undefined" != typeof $("#MicrosoftAccountExchange") && $("#MicrosoftAccountExchange").text("Microsoft"), $("*").removeAttr("placeholder") });</script>
+    <script>
+        $(function () {
+            var buttonsVerify_custom = document.createElement("div");
+            buttonsVerify_custom.className = "buttons verify-custom";
+
+            var email_fail_retry_custom = document.createElement("div");
+            email_fail_retry_custom.id = 'email_fail_retry_custom';
+            email_fail_retry_custom.className = "error";
+            email_fail_retry_custom.innerHTML = "That code is incorrect. Please try again.";
+
+            var email_ver_wait_custom = document.createElement("div");
+            email_ver_wait_custom.id = 'email_ver_wait_custom';
+            email_ver_wait_custom.className = "working";
+
+            var email_ver_but_send_custom = document.createElement("button");
+            email_ver_but_send_custom.id = "email_ver_but_send_custom";
+            email_ver_but_send_custom.className = "sendButton-custom";
+            email_ver_but_send_custom.innerHTML = "Send verification code";
+            email_ver_but_send_custom.onclick = sendEamil;
+
+            var email_ver_but_verify_custom = document.createElement("button");
+            email_ver_but_verify_custom.id = "email_ver_but_verify_custom";
+            email_ver_but_verify_custom.className = "verifyButton-custom";
+            email_ver_but_verify_custom.innerHTML = "Verify code";
+            email_ver_but_verify_custom.onclick = verifyCode;
+
+            buttonsVerify_custom.appendChild(email_ver_wait_custom);
+            buttonsVerify_custom.appendChild(email_fail_retry_custom);
+            buttonsVerify_custom.appendChild(email_ver_but_verify_custom);
+            buttonsVerify_custom.appendChild(email_ver_but_send_custom);
+            document.getElementById("verificationCode").parentElement.parentElement.appendChild(buttonsVerify_custom);
+
+            $('#email_ver_wait_custom').hide();
+            $('#email_fail_retry_custom').hide();
+            $('#email_ver_but_verify_custom').hide();
+            $('#verificationCode').hide();
+            $("label[for='verificationCode']").hide();
+        });
+
+        function sendEamil() {
+
+            if (!document.getElementById("email").checkValidity()) {
+                $('#email').focus().trigger(jQuery.Event('input'));
+            }
+            else {
+
+                $('#email_ver_wait_custom').show();
+
+                $.post("https://aadb2cemailverification.azurewebsites.net/api/identity/send",
+                    JSON.stringify({ email: document.getElementById("email").value.trim() })).done(function () {
+                        console.log("Email sent successfuly");
+
+                        // Show the verification code claim
+                        $('#verificationCode').show();
+                        $("label[for='verificationCode']").show();
+
+                        // Change the send verification code title to re-send
+                        $('#email_ver_but_send_custom').html('Send new code');
+
+                        // Show the verify button
+                        $('#email_ver_but_verify_custom').show();
+
+                        // Hide the error message
+                        $('#email_fail_retry_custom').hide();
+
+                        // Hide the progress bar
+                        $('#email_ver_wait_custom').hide();
+                    })
+                    .fail(function (response) {
+
+                        // Hide the progress bar
+                        $('#email_ver_wait_custom').hide();
+                        console.log(response.responseText);
+                    });
+            }
+        }
+
+        function verifyCode() {
+
+
+            // Hide the progress bar
+            $('#email_ver_wait_custom').show();
+            
+            $.post("https://aadb2cemailverification.azurewebsites.net/api/identity/verify",
+                JSON.stringify({
+                    email: $('#email').val().trim(),
+                    code: $('#verificationCode').val().trim()
+                })).done(function () {
+                    console.log("Email verified successfuly");
+
+                    // Hide the send and verify buttons
+                    $('#email_ver_but_verify_custom').hide();
+                    $('#email_ver_but_send_custom').hide();
+
+                    // Hide the verification code claim
+                    $('#verificationCode').hide();
+                    $("label[for='verificationCode']").hide();
+
+                    // Disable the email inputbox
+                    $('#email').attr("disabled", "disabled"); 
+
+                    // Hide the progress bar
+                    $('#email_ver_wait_custom').hide();
+                })
+                .fail(function (response) {
+                    // Show the error message
+                    $('#email_fail_retry_custom').show();
+
+
+                    // Hide the progress bar
+                    $('#email_ver_wait_custom').hide();
+
+                    console.log(response.responseText);
+                });
+        }
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
   </body>
 </html>
